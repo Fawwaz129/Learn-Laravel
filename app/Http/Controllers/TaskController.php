@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
-use Facade\Ignition\Tabs\Tab;
 
 class TaskController extends Controller
 {
@@ -27,12 +26,20 @@ class TaskController extends Controller
         return $task;
     }
 
+    public function create(){
+        return view('task.create');
+    }
+
     public function store(Request $request){
-        Task::store([
+        Task::create([
             'task' => $request->task,
             'user' => $request->user
         ]);
         return 'Success';
+    }
+
+    public function edit($id){
+        return view('task.edit');
     }
     
     public function update(Request $request, $id){
