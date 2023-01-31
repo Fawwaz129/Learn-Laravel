@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-
-    protected $filable = [
+// php artisan make:model Task
+    protected $fillable = [
         'task',
         'user'
     ];
