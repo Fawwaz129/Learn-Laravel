@@ -13,10 +13,14 @@
                    <strong class="mb-1">{{ $item->task }}</strong>
                    <small>Wed</small>
                 </div>
-                <div class="col-10 mb-1 small">{{ $item->user }}</div>
+                <div class="col-10 mb-1 small">{{ $item->user }}</div> 
                 <div class="group-action">
+                    <form action="{{ url("/tasks/$item->id") }}" method='POST'>
+                        @csrf
+                        @method('DELETE')
                     <a href="{{ url("/tasks/$item->id/edit") }}" class="badge bg-info text-white">edit</a>
-                    <a href="#" class="badge bg-danger text-white">delete</a>
+                    <button class="badge bg-danger text-white">delete</button>
+                </form>
                 </div>
             </div>
         </div>
