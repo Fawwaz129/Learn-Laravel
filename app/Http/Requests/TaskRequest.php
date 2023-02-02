@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
+// php artisan make:request TaskRequest
+// https://laravel.com/docs/9.x/validation#available-validation-rules
 class TaskRequest extends FormRequest
 {
     /**
@@ -23,11 +25,23 @@ class TaskRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            
-            'task' => ['required'],
-            'user' => ['required'],
+        $rule_task_unique = Rule::unique('tasks', 'task');
+        if ($this -> method() !== 'POST') {
+            $rule_task_unique -> ignore($this->route()->parameter('id'));
+        }
 
+        return [
+            // 'task' => ['required', 'unique:tasks,task'],
+            'task' => ['required',$rule_task_unique],
+            'user' => ['required']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'isian :attribute harus diisi',
+            'user.required' => 'nama pengguna harus diisi'
         ];
     }
 }
