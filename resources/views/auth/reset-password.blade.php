@@ -15,11 +15,11 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('reset-password') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
-                    <input name="email" type="email" class="form-control" value="{{ old('email') }}">
+                    <input name="email" type="email" class="form-control" value="{{ old('email', $request->email) }}">
                     @error('email')
                         <span class="text-danger">
                             {{ $message }}
@@ -35,8 +35,16 @@
                         </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">login</button>
-                <a href="{{ route('password.request') }}" class="btn btn-link">Forgot Your Password</a>
+                <div class="mb-3">
+                    <label for="" class="form-label">Confirm Password</label>
+                    <input name="password_confirmation" type="password" class="form-control">
+                    @error('password')
+                        <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
     </div>
