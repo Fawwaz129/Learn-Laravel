@@ -15,8 +15,9 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('reset-password') }}" method="POST">
+            <form action="{{ route('password.update') }}" method="POST">
                 @csrf
+                <input type="hidden" name="token" value="{{ $request->route('token')}}">
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
                     <input name="email" type="email" class="form-control" value="{{ old('email', $request->email) }}">
@@ -44,7 +45,7 @@
                         </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
             </form>
         </div>
     </div>
